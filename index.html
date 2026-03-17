@@ -21,14 +21,19 @@
             title,
             content,
             show = false,
-            onClose = () => { }
+            onClose = () => { },
+            onConfirm = () => { }
+
         }) {
             return show && ReactDOM.createPortal(
                 <div className="modal-container">
                     <div className="modal">
                         <h2>{title}</h2>
-                        <p>{content}</p>
-                        <button onClick={onClose}>Annulla</button>
+                        {content}
+                        <div>
+                            <button onClick={onClose}>Annulla</button>
+                            <button onClick={onConfirm}>Conferma</button>
+                        </div>
                     </div>
                 </div>,
                 document.body
@@ -42,16 +47,29 @@
 
             const [animal, setAnimal] = useState([])
 
+            const [show, setShow] = useState(false)
+
+            const [animaleAgg, setAnimaleAgg] = useState([''])
+
+            const addAnimal = () => {
+                if (!animaleAgg) return;
+                setAnimal(curr => [...curr, animaleAgg])
+                setAnimaleAgg('')
+                setShow(false)
+            }
+
             const aggiungiAnimale = () => {
-                const numeroRandom = Math.floor(Math.random() * animalsChoices.length);
-                const animaleRandom = animalsChoices[numeroRandom];
-                setAnimal(curr => [...curr, animaleRandom]);
+                //MILESTONE 2
+                // const numeroRandom = Math.floor(Math.random() * animalsChoices.length);
+                // const animaleRandom = animalsChoices[numeroRandom];
+                // setAnimal(curr => [...curr, animaleRandom]);
+
 
             }
 
             return (
                 <>
-                    <button onClick={aggiungiAnimale}> aggiungi un animale</button>
+                    <button onClick={() => setShow(true)}> aggiungi un animale</button>
                     <details>
                         <summary>Animali</summary>
                         <ul>
@@ -61,6 +79,18 @@
                             ))}
                         </ul>
                     </details>
+                    <Modal
+                        show={show}
+                        onClose={() => setShow(false)}
+                        onConfirm={addAnimal}
+                        title='aggiungi animale'
+                        content={
+                            <input type='text'
+                                value={animaleAgg}
+                                onChange={e => setAnimaleAgg(e.target.value)}
+                            />
+                        }
+                    />
                 </>
             )
         }
