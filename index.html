@@ -7,7 +7,7 @@
     <title>I miei animali Preferiti</title>
     <link rel="stylesheet" href="style.css">
     <!-- react -->
-    <script src="https://unpkg.com/react@18/umd/react.development. js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <!-- fine react -->
@@ -23,7 +23,7 @@
                     <summary>Animali</summary>
                     <ul>
                         {animali.map((a, i) => (
-                            <li key={i}>{animali}</li>
+                            <li key={i}>{a}</li>
 
                         ))}
                     </ul>
@@ -35,8 +35,8 @@
     <!-- root e render -->
     <script type="text/babel">
         const { createRoot } = ReactDOM;
-        const elementoHtml = document.querySelector('.lista-animali')
-        const root = createRoot(elementoHtml)
+        const elementoHtml = document.querySelector('.lista-animali');
+        const root = createRoot(elementoHtml);
         root.render(<ListaAnimali />)
     </script>
 </head>
